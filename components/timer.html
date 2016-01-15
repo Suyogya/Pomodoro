@@ -1,0 +1,66 @@
+<template id="setTimerElement">
+	<style>
+
+		:host {
+			display: inline-block;
+			width: 250px;
+			height: 100px;
+		}
+
+		:host(.inactive) {
+			display: none;
+		}
+
+		::content h1 {
+			margin: 0px 5px 0px 5px;
+			font-size: 450%;
+		}
+
+		div {
+			display: inline-block;
+		}
+
+		#time{
+			margin:0px 15px 0px 15px;
+		}
+
+		input {
+			display: block;
+			font-family: FontAwesome;
+			font-size: 200%;
+		}
+	</style>
+	<div id="content">
+		<div id="time">
+			<content select "h1"></content>
+		</div>
+		<div class="inline">
+			<input id="upButton" type="button" value="&#xf0d8"></input>
+			<input id="dnButton" type="button" value="&#xf0d7"></input>
+		</div>
+	</div>
+</template>
+
+<script>
+	"use strict";
+	(function (){
+
+	let importDoc = document.currentScript.ownerDocument;
+
+	class PomodoroTimeElement extends HTMLElement{
+
+		constructor(){
+			super();
+		}
+
+		createdCallback(){
+			var template = importDoc.querySelector('template#setTimerElement');
+			var shadow = this.createShadowRoot();
+			shadow.appendChild(importDoc.importNode(template.content, true));
+		}
+	}
+
+	document.registerElement('set-timer-element', PomodoroTimeElement);
+	}());
+
+</script>

@@ -5,6 +5,7 @@
 	<meta charset='UTF-8'>
 	<title>HTML 5</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"></link>
+	<link rel="import" href="components/timer.html"></link>
 </head>
 
 <body>
@@ -13,62 +14,13 @@
 			display:inline-block;
 		}
 	</style>
-	<set-timer-element id="workTime">
+
+	<set-timer-element id="workTime" class="large">
 		<h1>25:00</h1>
 	</set-timer-element>
 	<set-timer-element id="breakTime">
 		<h1>5:00</h1>
 	</set-timer-element>
-	<template id="setTimerElement">
-		<style>
-			div#content {
-				display: inline-block;
-				margin: 10px;
-			}
-
-			div#content h1 {
-				display: inline-block;
-			}
-
-			div.inline {
-				display: inline-block;
-			}
-
-			div.inline>input {
-				display: block;
-			}
-
-			input {
-				font-family: FontAwesome;
-			}
-		</style>
-		<div id="content">
-			<content select "h1"></content>
-			<div class="inline">
-				<input id="upButton" type="button" value="&#xf0d8"></input>
-				<input id="dnButton" type="button" value="&#xf0d7"></input>
-			</div>
-		</div>
-	</template>
-
-	<script>
-		"use strict";
-
-		class PomodoroTimeElement extends HTMLElement{
-
-			constructor(){
-				super();
-			}
-
-			createdCallback(){
-				var template = document.querySelector('template#setTimerElement');
-				var shadow = this.createShadowRoot();
-				shadow.appendChild(document.importNode(template.content, true));
-			}
-		}
-
-		document.registerElement('set-timer-element', PomodoroTimeElement);
-	</script>
 
 </body>
 

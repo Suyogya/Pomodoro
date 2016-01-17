@@ -1,0 +1,29 @@
+{
+  "name": "pomodoro",
+  "version": "0.0.1",
+  "description": "Pomodoro timer using ES6 and HTML5 Web component.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suyogya/pomodoro.git"
+  },
+  "author": "Suyogya Shrestha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Suyogya/pomodoro/issues"
+  },
+  "homepage": "https://github.com/Suyogya/pomodoro#readme",
+  "devDependencies": {
+    "http-server": "0.8.5",
+    "jspm": "0.16.23"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "app"
+    },
+    "devDependencies": {}
+  }
+}

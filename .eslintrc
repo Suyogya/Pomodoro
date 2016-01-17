@@ -1,0 +1,15 @@
+{
+	"extends":"eslint:recommended",
+	"ecmaFeatures":{
+		"modules":true,
+		"forOf":true
+
+	},
+	"rules":{
+		"strict":[2, "global"],
+		"no-unused-vars":1
+	},
+	"env":{
+		"es6":true
+	}
+}

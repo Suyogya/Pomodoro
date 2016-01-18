@@ -19,9 +19,13 @@
   "devDependencies": {
     "gulp": "3.9.0",
     "gulp-eslint": "^1.1.1",
+    "gulp-if": "^2.0.0",
     "gulp-jscs": "^3.0.2",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-print": "^2.0.1",
     "http-server": "0.8.5",
-    "jspm": "0.16.23"
+    "jspm": "0.16.23",
+    "yargs": "^3.32.0"
   },
   "jspm": {
     "directories": {

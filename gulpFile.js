@@ -1,22 +1,23 @@
 var gulp = require('gulp');
-var jscs = require('gulp-jscs');
-var eslint = require('gulp-eslint');
+var args = require('yargs').argv;
+var config = require('./gulp.config');
 
-gulp.task('vet', function() {
+var $ = require('gulp-load-plugins')({lazy: true});
+
+gulp.task('jscs', function() {
 	return gulp
-		.src([
-			'./src/**/*.js'
-		])
-		.pipe(jscs({fix:true}))
-		.pipe(jscs.reporter());
+		.src(config.alljs)
+		.pipe($.jscs({fix:true}))
+		.pipe($.jscs.reporter());
 });
 
 gulp.task('lint', function() {
 	return gulp
-		.src([
-			'./src/**/*.js'
-		])
-		.pipe(eslint())
-		.pipe(eslint.format('unix'))
-		.pipe(eslint.failAfterError());
+		.src(config.alljs)
+		.pipe($.if(args.verbose, $.print()))
+		.pipe($.eslint())
+		.pipe($.eslint.format('unix'))
+		.pipe($.eslint.failAfterError());
 });
+
+gulp.task('')

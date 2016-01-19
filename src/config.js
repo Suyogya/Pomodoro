@@ -1,4 +1,6 @@
 System.config({
   transpiler: false,
-  paths: {}
+  map:{
+      Publisher: "js/observer.js"
+  }
 });

@@ -29,7 +29,7 @@ class Publisher{
 	publish(arg, type='any'){
 		let subscribers = this.subscribers[type];
 
-		for(subscriber of subscribers){
+		for(let subscriber of subscribers){
 			let method = subscriber.method;
 			let context = subscriber.context;
 			method.apply(context, arg);

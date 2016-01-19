@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Suyogya/pomodoro#readme",
   "devDependencies": {
+    "chai": "^3.4.1",
     "gulp": "3.9.0",
     "gulp-eslint": "^1.1.1",
     "gulp-if": "^2.0.0",
@@ -26,11 +27,16 @@
     "gulp-print": "^2.0.1",
     "http-server": "0.8.5",
     "jspm": "0.16.23",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jspm": "^2.0.2",
+    "karma-mocha": "^0.2.1",
+    "mocha": "^2.3.4",
     "yargs": "^3.32.0"
   },
   "jspm": {
     "directories": {
-      "baseURL": "app"
+      "baseURL": "src"
     },
     "devDependencies": {}
   }

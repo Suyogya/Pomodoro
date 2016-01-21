@@ -22,7 +22,8 @@ module.exports = function(config) {
 
     proxies:{
         '/node_modules': '/base/node_modules',
-        '/base/js': 'base/src/js'
+        '/base/js': '/base/src/js',
+        '/base/jspm_packages': '/base/src/jspm_packages'
 
     },
 

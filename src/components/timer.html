@@ -41,9 +41,6 @@
 	</div>
 </template>
 <script>
-    System.import("js/timer.js")
-</script>
-<script>
 	"use strict";
 	(function (){
 
@@ -64,5 +61,11 @@
 
 	document.registerElement('set-timer-element', PomodoroTimeElement);
 	}());
+    
+    System
+        .import("js/timer.js")
+        .then(function(){
+            
+        })
 
 </script>

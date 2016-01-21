@@ -1,8 +1,6 @@
-"use strict";
-
 let global = (function (){return this;}());
 
-class Publisher{
+export default class Publisher{
 	constructor(){
 		this._subscribers = {}
 	}

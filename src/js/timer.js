@@ -1,15 +1,7 @@
-let Timer = null;
+import Publisher from "Publisher";
 
-System.import("Publisher")
-	.then(()=> Timer = TimerClass());
-
-function TimerClass(){
-
-	class Timer extends Publisher{
-		constructor(){
-			super();
-		}
-	}
-
-	return Timer;
+class Timer extends Publisher{
+    constructor(){
+        super();
+    }
 }

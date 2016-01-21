@@ -31,9 +31,12 @@ describe("Timer class test suite", function (){
     
     it('should set currentTime to totalTime when totalTime is updated', function (){
         timer.totalTime = 100;
-        timer.currentTime.should.be.equal(100);
+        timer.currentTime.should.be.equal(timer.totalTime);
         
         timer.totalTime = 200;
-        timer.currentTime.should.be.equal(200);
+        timer.currentTime.should.be.equal(timer.totalTime);
+        
+        timer.totalTime = -100;
+        timer.currentTime.should.be.equal(timer.totalTime);
     });
 });

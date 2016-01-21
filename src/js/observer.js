@@ -1,3 +1,5 @@
+"use strict";
+
 let global = (function (){return this;}());
 
 export default class Publisher{

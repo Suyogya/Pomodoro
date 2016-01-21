@@ -28,6 +28,7 @@
     "http-server": "0.8.5",
     "jspm": "0.16.23",
     "karma": "^0.13.19",
+    "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.2",
     "karma-jspm": "^2.0.2",
     "karma-mocha": "^0.2.1",

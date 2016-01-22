@@ -8,12 +8,12 @@ export default class Publisher{
 	}
 
 	subscribe(fn, context=global, type='any'){
-		let subscribers = this._subscribers[type]
+		let subscribers = this._subscribers[type];
 		if(subscribers === undefined){
-			subscribers[type] = [];
+			this._subscribers[type] = [];
 		}
 
-		subscribers[type].push({method:fn, context: context});
+		this._subscribers[type].push({method:fn, context: context});
 	}
 
 	unsubscribe(fn, context=global, type='any'){
@@ -27,12 +27,16 @@ export default class Publisher{
 	}
 
 	publish(arg, type='any'){
-		let subscribers = this.subscribers[type];
-
+		let subscribers = this._subscribers[type];
+        
+        if(subscribers === undefined){
+            return;
+        }
+        
 		for(let subscriber of subscribers){
 			let method = subscriber.method;
 			let context = subscriber.context;
-			method.apply(context, arg);
+			method.call(context, arg);
 		}
 	}
 }

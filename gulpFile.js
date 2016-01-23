@@ -19,5 +19,3 @@ gulp.task('lint', function() {
 		.pipe($.eslint.format('unix'))
 		.pipe($.eslint.failAfterError());
 });
-
-gulp.task('')

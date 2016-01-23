@@ -11,7 +11,7 @@
 			display: none;
 		}
 
-		::content h1 {
+		h1 {
 			margin: 0px 5px 0px 5px;
 			font-size: 450%;
 		}
@@ -34,7 +34,7 @@
 		<div id="time">
 			<h1>00:00</h1>
 		</div>
-		<div class="inline">
+		<div id="button-divs" class="inline">
 			<input id="upButton" type="button" value="&#xf0d8"></input>
 			<input id="dnButton" type="button" value="&#xf0d7"></input>
 		</div>
@@ -57,6 +57,8 @@
 			var shadow = this.createShadowRoot();
 			shadow.appendChild(importDoc.importNode(template.content, true));
 		}
+
+
 	}
 
 	document.registerElement('pomodoro-timer-element', PomodoroTimeElement);

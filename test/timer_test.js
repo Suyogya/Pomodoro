@@ -47,12 +47,18 @@ describe("Timer class test suite", function (){
         timer.totalTime.should.be.equal(100);
     });
 
-    it('should have a start method that will start the timer and set status to STARTED', function (){
+    it('should have a start method that will start the timer and set status to STARTED', function (done){
         let startValue = 5;
         timer.totalTime = startValue;
-        timer.start();
+        let assertTest = (status)=>{
+            status.should.be.equal(timer.STATUS.STARTED);
+            timer.unsubscribe(assertTest, this, 'status');
+            done();
+        };
 
-        timer.status.should.be.equal(timer.STATUS.STARTED);
+        timer.subscribe(assertTest, this, 'status');
+
+        timer.start();
     });
 
     it('should stop after currentTime reaches zero and set status to DONE', function (done){
@@ -60,11 +66,11 @@ describe("Timer class test suite", function (){
         timer.totalTime = startValue;
         timer.start();
 
-        setTimeout(()=>{
-            timer.currentTime.should.be.equal(0);
-            timer.status.should.be.equal(timer.STATUS.DONE);
-            console.log(timer.status);
-            done();
-        }, 6000);
+        timer.subscribe((status)=>{
+            if(status === timer.STATUS.DONE){
+                timer.currentTime.should.be.equal(0);
+                done();
+            }
+        }, this, 'status');
     })
 });

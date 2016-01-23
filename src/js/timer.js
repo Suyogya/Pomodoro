@@ -1,6 +1,7 @@
 import Publisher from "Publisher";
 
-var updateCurrentTime = Symbol();
+let updateCurrentTime = Symbol();
+let updateStatus = Symbol();
 
 let STATUS = {
     RESET: 0,
@@ -15,7 +16,7 @@ export class Timer extends Publisher {
         super();
         this.totalTime = _totalTime;
         this.STATUS = STATUS;
-        this.status = STATUS.RESET;
+        this[updateStatus](STATUS.RESET);
     }
 
     get currentTime() {
@@ -36,24 +37,25 @@ export class Timer extends Publisher {
 
         if (value === 0) {
             clearInterval(this._intervalMethod);
-            this.status = STATUS.DONE;
+            this[updateStatus](STATUS.DONE);
         }
 
-        this.publish(this._currentTime, 'currentTime');
+        this.publish(this.currentTime, 'currentTime');
     }
 
     get status() {
         return this._status;
     }
 
-    set status(value) {
+    [updateStatus](value) {
         this._status = value;
+        this.publish(this.status, 'status');
     }
 
     start() {
         clearInterval(this._intervalMethod);
         this._intervalMethod = this.timerRun();
-        this.status = STATUS.STARTED;
+        this[updateStatus](STATUS.STARTED);
     }
 
     timerRun() {

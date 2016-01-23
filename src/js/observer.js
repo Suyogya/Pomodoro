@@ -19,8 +19,12 @@ export default class Publisher{
 	unsubscribe(fn, context=global, type='any'){
 		let subscribers = this._subscribers[type];
 
+		if(subscribers === undefined){
+			return;
+		}
+
 		subscribers.forEach(function(subscriber, index, array){
-			if(subscriber === fn){
+			if(subscriber.method === fn, subscriber.context === context){
 				array.splice(index, 1);
 			}
 		});
@@ -28,11 +32,11 @@ export default class Publisher{
 
 	publish(arg, type='any'){
 		let subscribers = this._subscribers[type];
-        
+
         if(subscribers === undefined){
             return;
         }
-        
+
 		for(let subscriber of subscribers){
 			let method = subscriber.method;
 			let context = subscriber.context;

@@ -1,6 +1,5 @@
 <template id="timerElement">
 	<style>
-
 		:host {
 			display: inline-block;
 			width: 250px;
@@ -20,8 +19,8 @@
 			display: inline-block;
 		}
 
-		#time{
-			margin:0px 15px 0px 15px;
+		#time {
+			margin: 0px 15px 0px 15px;
 		}
 
 		input {
@@ -42,32 +41,51 @@
 </template>
 <script>
 	"use strict";
-	(function (){
 
 	let importDoc = document.currentScript.ownerDocument;
 
-	class PomodoroTimeElement extends HTMLElement{
-
-		constructor(){
-			super();
-		}
-
-		createdCallback(){
-			var template = importDoc.querySelector('template#timerElement');
-			var shadow = this.createShadowRoot();
-			shadow.appendChild(importDoc.importNode(template.content, true));
-		}
-
-
-	}
-
-	document.registerElement('pomodoro-timer-element', PomodoroTimeElement);
-	}());
-
-    System
+	System
         .import("js/timer.js")
-        .then(function(){
+        .then(function (module){
+			let Timer = module.Timer;
 
-        })
+			class PomodoroTimeElement extends HTMLElement{
+
+				constructor(){
+					super();
+				}
+
+				createdCallback(){
+					var template = importDoc.querySelector('template#timerElement');
+					this.shadow = this.createShadowRoot();
+					this.shadow.appendChild(importDoc.importNode(template.content, true));
+
+					this._timer = new Timer();
+
+					this.timer.subscribe(this.updateTime, this, 'currentTime');
+
+					this.timer.totalTime = 100;
+					this.timer.start();
+
+				}
+
+				get timer(){
+					return this._timer;
+				}
+
+				updateTime(timeInSeconds){
+					let getTwoDigits = (num) => ('0' + num).slice(-2);
+
+					let min = getTwoDigits(Math.floor((timeInSeconds%3600)/60));
+					let sec = getTwoDigits(timeInSeconds%60);
+
+					let time = min + ':' + sec;
+
+					this.shadow.querySelector('h1').innerHTML = time;
+				}
+			}
+
+			document.registerElement('pomodoro-timer-element', PomodoroTimeElement);
+	});
 
 </script>

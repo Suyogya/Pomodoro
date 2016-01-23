@@ -34,6 +34,12 @@ var Timer = (function () {
         
         [updateCurrentTime](value){
             this._currentTime = value;
+            
+            if(value === 0){
+                clearInterval(this._intervalMethod);
+                this.status = STATUS.DONE;
+            }
+            
             this.publish(this._currentTime, 'currentTime');
         };
         

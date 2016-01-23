@@ -60,14 +60,10 @@ describe("Timer class test suite", function (){
         timer.totalTime = startValue;
         timer.start();
         
-        timer.subscribe(()=>{
-            startValue--;
-            console.log(timer.currentTime);
-            timer.currentTime.should.be.equal(startValue);
-        }, this, 'currentTime');
-        
         setTimeout(()=>{
             timer.currentTime.should.be.equal(0);
+            timer.status.should.be.equal(timer.STATUS.DONE);
+            console.log(timer.status);
             done();
         }, 6000);
     })

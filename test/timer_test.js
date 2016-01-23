@@ -61,12 +61,12 @@ describe("Timer class test suite", function () {
         timer.start();
     });
 
-    it('should stop after currentTime reaches zero and set status to DONE', function (done) {
+    it('should stop after currentTime reaches zero and set status to DONE and reset the currentTime to totalTime', function (done) {
         timer.totalTime = 2;
         timer.start();
         let assertTest = (status) => {
             if (timer.status === timer.STATUS.DONE) {
-                timer.currentTime.should.be.equal(0);
+                timer.currentTime.should.be.equal(timer.totalTime);
                 timer.unsubscribe(assertTest, this, 'status');
                 done();
             }

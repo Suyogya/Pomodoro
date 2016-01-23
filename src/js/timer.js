@@ -2,9 +2,9 @@ import Publisher from "Publisher";
 
 let updateCurrentTime = Symbol();
 let updateStatus = Symbol();
+let runTimer = Symbol();
 
 let STATUS = {
-    RESET: 0,
     STARTED: 1,
     PAUSED: 2,
     STOPPED: 3,
@@ -16,11 +16,7 @@ export class Timer extends Publisher {
         super();
         this.totalTime = _totalTime;
         this.STATUS = STATUS;
-        this[updateStatus](STATUS.RESET);
-    }
-
-    get currentTime() {
-        return this._currentTime;
+        this[updateStatus](STATUS.STOPPED);
     }
 
     get totalTime() {
@@ -30,6 +26,10 @@ export class Timer extends Publisher {
     set totalTime(value) {
         this._totalTime = value >= 0 ? value : 0;
         this[updateCurrentTime](this._totalTime);
+    }
+
+    get currentTime() {
+        return this._currentTime;
     }
 
     [updateCurrentTime](value) {
@@ -54,11 +54,34 @@ export class Timer extends Publisher {
 
     start() {
         clearInterval(this._intervalMethod);
-        this._intervalMethod = this.timerRun();
+        this._intervalMethod = this[runTimer]();
         this[updateStatus](STATUS.STARTED);
     }
 
-    timerRun() {
+    pause() {
+        clearInterval(this._intervalMethod);
+        this[updateStatus](STATUS.PAUSED);
+    }
+
+    stop() {
+        clearInterval(this._intervalMethod);
+        this[updateCurrentTime](this.totalTime);
+        this[updateStatus](STATUS.STOPPED);
+    }
+
+    addMinute() {
+        if (this.status === STATUS.STOPPED) {
+            this.totalTime += 60;
+        }
+    }
+
+    reduceMinute() {
+        if (this.status === STATUS.STOPPED) {
+            this.totalTime -= 60;
+        }
+    }
+
+    [runTimer]() {
         return setInterval(() => this[updateCurrentTime](this.currentTime - 1), 1000);
     }
 };

@@ -72,13 +72,13 @@ export class Timer extends Publisher {
     }
 
     addMinute() {
-        if (this.status === STATUS.STOPPED) {
+        if (this.status === STATUS.STOPPED || this.status === STATUS.DONE) {
             this.totalTime += 60;
         }
     }
 
     reduceMinute() {
-        if (this.status === STATUS.STOPPED) {
+        if (this.status === STATUS.STOPPED || this.status === STATUS.DONE) {
             this.totalTime -= 60;
         }
     }

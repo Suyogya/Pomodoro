@@ -1,4 +1,4 @@
-<template id="setTimerElement">
+<template id="timerElement">
 	<style>
 
 		:host {
@@ -53,19 +53,19 @@
 		}
 
 		createdCallback(){
-			var template = importDoc.querySelector('template#setTimerElement');
+			var template = importDoc.querySelector('template#timerElement');
 			var shadow = this.createShadowRoot();
 			shadow.appendChild(importDoc.importNode(template.content, true));
 		}
 	}
 
-	document.registerElement('set-timer-element', PomodoroTimeElement);
+	document.registerElement('pomodoro-timer-element', PomodoroTimeElement);
 	}());
-    
+
     System
         .import("js/timer.js")
         .then(function(){
-            
+
         })
 
 </script>

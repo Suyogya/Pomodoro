@@ -29,6 +29,10 @@
 			font-size: 200%;
 		}
 
+		.hidden{
+			display:none;
+		}
+
 		::content #initialTime{
 			display:none;
 		}
@@ -37,7 +41,7 @@
 		<div id="time">
 			<h1>00:00</h1>
 		</div>
-		<div id="button-divs" class="inline">
+		<div id="buttons-div" class="inline">
 			<input id="upButton" type="button" value="&#xf0d8"></input>
 			<input id="dnButton" type="button" value="&#xf0d7"></input>
 		</div>
@@ -58,6 +62,12 @@
 
 				constructor(){
 					super();
+
+					this.TimerCommands = {
+						start: "start",
+						pause: "pause",
+						stop: "stop"
+					}
 				}
 
 				createdCallback(){
@@ -69,6 +79,7 @@
 					this._timer = new Timer();
 
 					this.timer.subscribe(this.updateTime, this, 'currentTime');
+					this.timer.subscribe(this.updateVisibility, this, 'status');
 					this.timer.totalTime = totalTime;
 					this.init();
 				}
@@ -86,6 +97,25 @@
 					let time = min + ':' + sec;
 
 					this.shadow.querySelector('h1').innerHTML = time;
+				}
+
+				updateElementVisibility(status){
+					if(status === this.timer.STATUS.DONE || status === this.timer.STATUS.STOPPED){
+						this.classList.add('inactive');
+					}
+					else{
+						this.classList.remove('inactive');
+					}
+				}
+
+				updateButtonVisibility(status){
+					let btnDiv = this.shadow.querySelector('#buttons-div');
+					if(status == this.timer.STATUS.STARTED || status == this.timer.STATUS.PAUSED){
+						btnDiv.classList.add('hidden');
+					}
+					else{
+						btnDiv.classList.remove('hidden');
+					}
 				}
 
 				init(){

@@ -1,0 +1,33 @@
+<link rel="import" href="timerElement.html"></link>
+
+<template id="pomodoroElement">
+	<pomodoro-timer-element id="workTimer" class="active">
+		<span id="initialTime">1500</span>
+	</pomodoro-timer-element>
+	<pomodoro-timer-element id="breakTimer" class="inactive">
+		<span id="initialTime">300</span>
+	</pomodoro-timer-element>
+	<pomodoro-timer-element id="longBreakTimer" class="inactive">
+		<span id="initialTime">300</span>
+	</pomodoro-timer-element>
+</template>
+
+<script>
+	(function (){
+		let importDoc = document.currentScript.ownerDocument;
+
+		class pomodoroProto extends HTMLElement{
+			constructor(){
+				super();
+			}
+
+			createdCallback(){
+				let template = importDoc.querySelector('template#pomodoroElement');
+				this.shadow = this.createShadowRoot();
+				this.shadow.appendChild(importDoc.importNode(template.content, true));
+			}
+		}
+
+		document.registerElement('pomodoro-element', pomodoroProto);
+	}());
+</script>
